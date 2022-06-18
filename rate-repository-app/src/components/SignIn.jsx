@@ -1,10 +1,10 @@
-import Text from './Text'
-import { Pressable, View } from 'react-native'
+import { View } from 'react-native'
 import { Formik } from 'formik'
 import FormikTextInput from './FormikTextInput'
 import * as yup from 'yup'
 import useSignIn from '../hooks/useSignIn'
 import { useNavigate } from 'react-router-native'
+import Button from './Button'
 
 const initialValues = {
   username: '',
@@ -30,12 +30,22 @@ const SignInForm = ({ onSubmit }) => {
         container="container"
         secureTextEntry
       />
-      <Pressable onPress={onSubmit}>
-        <Text type="button" fontWeight="bold">
-          Sign In
-        </Text>
-      </Pressable>
+      <Button onSubmit={onSubmit} color="normal">
+        Sign In
+      </Button>
     </View>
+  )
+}
+
+export const SingInContainer = ({ onSubmit }) => {
+  return (
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={onSubmit}
+    >
+      {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
+    </Formik>
   )
 }
 
@@ -46,22 +56,13 @@ const SignIn = () => {
   const onSubmit = async (values) => {
     const { username, password } = values
     try {
-      const { data } = await signIn({ username, password })
+      await signIn({ username, password })
       navigate('/')
-      console.log(data)
     } catch (e) {
       console.log(e)
     }
   }
-  return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={onSubmit}
-    >
-      {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
-    </Formik>
-  )
+  return <SingInContainer onSubmit={onSubmit} />
 }
 
 export default SignIn

@@ -21,14 +21,6 @@ const styles = StyleSheet.create({
   fontWeightBold: {
     fontWeight: theme.fontWeights.bold,
   },
-  button: {
-    backgroundColor: theme.colors.primary,
-    margin: theme.padding.normal,
-    padding: theme.padding.normal,
-    borderRadius: 2,
-    color: 'white',
-    textAlign: 'center',
-  },
 })
 
 const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
@@ -38,7 +30,6 @@ const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
     color === 'primary' && styles.colorPrimary,
     fontSize === 'subheading' && styles.fontSizeSubheading,
     fontWeight === 'bold' && styles.fontWeightBold,
-    props.type === 'button' && styles.button,
     style,
   ]
 

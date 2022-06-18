@@ -1,6 +1,6 @@
 import { View, StyleSheet, Image } from 'react-native'
-import Text from './Text'
-import theme from './theme'
+import Text from '../Text'
+import theme from '../theme'
 
 const styles = StyleSheet.create({
   flexContainer: {
@@ -42,7 +42,7 @@ const numberFormatter = (num) => {
 }
 
 const RepositoryItem = ({ item }) => (
-  <View style={styles.container}>
+  <View style={styles.container} testID="repositoryItem">
     <View style={styles.flexContainer}>
       <Image style={styles.logo} source={{ uri: item.ownerAvatarUrl }} />
       <View style={styles.flexItem1}>

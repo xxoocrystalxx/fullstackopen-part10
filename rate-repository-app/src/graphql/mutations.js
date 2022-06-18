@@ -7,20 +7,45 @@ export const SIGN_IN = gql`
     }
   }
 `
-// export const CREATE_BOOK = gql`
-//   mutation createBook(
-//     $title: String!
-//     $published: Int!
-//     $author: String!
-//     $genres: [String]
-//   ) {
-//     addBook(
-//       title: $title
-//       published: $published
-//       genres: $genres
-//       author: $author
-//     ) {
-//       ...BookDetails
-//     }
-//   }
-//   ${BOOK_DETAILS}
+
+export const SIGN_UP = gql`
+  mutation signUp($username: String!, $password: String!) {
+    createUser(user: { username: $username, password: $password }) {
+      id
+      username
+    }
+  }
+`
+
+export const DELETE_REVIEW = gql`
+  mutation delete($id: ID!) {
+    deleteReview(id: $id)
+  }
+`
+
+export const CREATE_REVIEW = gql`
+  mutation create(
+    $repositoryName: String!
+    $ownerName: String!
+    $rating: Int!
+    $text: String
+  ) {
+    createReview(
+      review: {
+        repositoryName: $repositoryName
+        ownerName: $ownerName
+        rating: $rating
+        text: $text
+      }
+    ) {
+      id
+      user {
+        username
+      }
+      text
+      rating
+      createdAt
+      repositoryId
+    }
+  }
+`
